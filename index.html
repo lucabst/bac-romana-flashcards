@@ -13,7 +13,7 @@
       --line: #d9d5ce;
       --text: #1f2a24;
       --muted: #6c756e;
-      --shadow: 0 18px 45px rgba(45, 90, 61, 0.12);
+      --shadow: 0 18px 46px rgba(31, 42, 36, 0.1);
     }
 
     * {
@@ -22,13 +22,14 @@
 
     body {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Inter, "SF Pro Text", "SF Pro Display", Aptos, "Segoe UI Variable", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text);
       background: var(--background);
     }
 
     button {
       font: inherit;
+      font-weight: 600;
     }
 
     .app {
@@ -39,31 +40,30 @@
 
     .topbar {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 22px;
-      border-bottom: 2px solid rgba(45, 90, 61, 0.16);
-      padding-bottom: 18px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(31, 42, 36, 0.1);
+      padding-bottom: 24px;
     }
 
     .title {
       margin: 0;
-      color: var(--green);
-      font-size: clamp(28px, 5vw, 43px);
-      line-height: 1.03;
+      color: #1d211e;
+      font-size: clamp(23px, 3.7vw, 32px);
+      font-weight: 600;
+      line-height: 1.08;
       letter-spacing: 0;
     }
 
     .counter {
       flex: 0 0 auto;
-      color: var(--green);
-      background: var(--paper);
-      border: 1px solid rgba(45, 90, 61, 0.2);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 16px;
-      box-shadow: 0 6px 18px rgba(45, 90, 61, 0.08);
+      color: #8a8a8a;
+      padding: 0;
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 400;
+      line-height: 1.1;
     }
 
     .tabs {
@@ -105,12 +105,13 @@
     .question-card {
       min-height: 250px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
       justify-content: center;
       background: var(--paper);
-      border: 1px solid rgba(45, 90, 61, 0.16);
-      border-radius: 8px;
-      padding: clamp(26px, 5vw, 54px);
+      border: 1px solid rgba(31, 42, 36, 0.11);
+      border-radius: 22px;
+      padding: clamp(28px, 5vw, 48px);
       box-shadow: var(--shadow);
     }
 
@@ -118,9 +119,10 @@
       width: 100%;
       margin: 0;
       color: var(--text);
-      font-size: clamp(19px, 2.4vw, 20px);
-      line-height: 1.55;
-      text-align: center;
+      font-size: clamp(21px, 3.2vw, 29px);
+      font-weight: 600;
+      line-height: 1.48;
+      text-align: left;
     }
 
     .answer-button,
@@ -135,16 +137,33 @@
     }
 
     .answer-button {
+      align-self: stretch;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
       min-height: 52px;
-      margin-top: 16px;
+      margin-top: 30px;
       font-size: 18px;
+      border-radius: 14px;
       box-shadow: 0 12px 26px rgba(45, 90, 61, 0.16);
     }
 
+    .answer-button::after {
+      content: "";
+      width: 15px;
+      height: 15px;
+      border: 3px solid currentColor;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at center, currentColor 0 2.4px, transparent 2.9px);
+      opacity: 0.95;
+    }
+
     .random-button {
-      min-height: 78px;
+      min-height: 98px;
       margin-top: 18px;
-      font-size: 34px;
+      font-size: 38px;
       line-height: 1;
       box-shadow: 0 15px 34px rgba(45, 90, 61, 0.2);
     }
@@ -267,13 +286,11 @@
       }
 
       .topbar {
-        display: grid;
-        align-items: start;
+        align-items: flex-start;
       }
 
       .counter {
-        width: 100%;
-        text-align: center;
+        text-align: right;
       }
 
       .question-card {
@@ -285,7 +302,7 @@
 <body>
   <main class="app">
     <header class="topbar">
-      <h1 class="title">Flashcarduri Bac Română</h1>
+      <h1 class="title">Română · BAC</h1>
       <div class="counter"><span id="questionCount">0</span> întrebări</div>
     </header>
 
@@ -297,8 +314,8 @@
     <section class="panel active" id="randomPanel" aria-labelledby="randomTabButton">
       <article class="question-card">
         <p class="question-text" id="questionText"></p>
+        <button class="answer-button" id="answerButton" type="button">Răspuns</button>
       </article>
-      <button class="answer-button" id="answerButton" type="button">Răspuns</button>
       <div class="gallery" id="gallery" aria-live="polite"></div>
       <button class="random-button" id="randomButton" type="button" aria-label="Alege o întrebare aleatorie">↻</button>
     </section>
